@@ -1,3 +1,12 @@
+/*
+input: 1行 + n行
+1. 方阵的大小n
+2. 每行数组数据
+
+output: n 行 每行2个数
+行列相加最大的坐标x, y
+每计算1次需要将相加的行列去掉，重新计算坐标
+*/
 #include<iostream>
 #include<vector>
 
