@@ -41,21 +41,22 @@ vector<int> colsum(vector<vector<int>>& num){
 vector<int> getrc(vector<vector<int>>& num, vector<int>& row, vector<int>& col){
 	int len1 = row.size();
 	int len2 = col.size();
-	int maxsum = 0;
+	int maxsum = -1;
 	int jump1 = 0, jump2 = 0;
-	int ri, rj;
+	int ri = 0, rj = 0;
 	vector<int> res(2, -1);
 	for (int i = 0; i < len1; i++){
-		if (row[i] == -1){
+		if (col[i] == -1){
 			jump1++;
 			continue;
 		}
+		jump2 = 0;
 		for (int j = 0; j < len2; j++){
-			if (col[j] == -1){
+			if (row[j] == -1){
 				jump2++;
 				continue;
 			}
-			int sum = row[i] + col[j] - num[j][i];
+			int sum = row[j] + col[i] - num[j][i];
 			if (sum > maxsum){
 				maxsum = sum;
 				res[0] = j - jump2 + 1;
@@ -65,8 +66,16 @@ vector<int> getrc(vector<vector<int>>& num, vector<int>& row, vector<int>& col){
 			}
 		}
 	}
-	row[ri] = -1;
-	col[rj] = -1;
+	for (int i = 0; i < len1; i++){
+		if (row[i] == -1) continue;
+		row[i] -= num[i][rj];
+	}
+	for (int i = 0; i < len1; i++){
+		if (col[i] == -1) continue;
+		col[i] -= num[ri][i];
+	}
+	row[rj] = -1;
+	col[ri] = -1;
 	return res;
 }
 
@@ -93,8 +102,9 @@ int main()
 			cin >> num[i][j];
 		}
 	}
-	//vector<vector<int>> res = solution(num);
+
 	solution(num);
+
 	for (int i = 0; i < n; i++){
 		for (int j = 0; j < 2; j++){
 			cout << ans[i][j] << " ";
