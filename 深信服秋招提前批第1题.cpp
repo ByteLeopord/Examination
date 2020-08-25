@@ -11,8 +11,7 @@ using namespace std;
 string solution(vector<int>& c, string& s){
 	int slen = s.size();
 	for (int i = 0; i < slen; i++){
-		int temp = s[i] - '0';
-		s[i] = c[temp] + '0';
+		s[i] = c[s[i] - '0'] + '0';
 	}
 	return s;
 }
@@ -32,8 +31,6 @@ int main()
 	for (int i = 0; i < t; i++){
 		int temp, num;
 		cin >> temp >> num;
-		if (mp[temp] != temp) continue;
-		mp[temp] = num;
 		for (int j = 0; j <= 9; j++){
 			if (mp[j] == temp){
 				mp[j] = num;
