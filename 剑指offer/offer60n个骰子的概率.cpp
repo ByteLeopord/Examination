@@ -1,3 +1,8 @@
+/*
+dp[i][j]的意义：有i个骰子时，能投出和为j的次数
+状态转移方程：dp[i][j] = dp[i-1][j-1] + ... + dp[i-1][j-6]
+初始状态：只有1个骰子, 和出现的次数都为1, 即dp[1][j] = 1
+*/
 class Solution {
 public:
     vector<double> twoSum(int n) {
