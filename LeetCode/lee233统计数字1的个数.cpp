@@ -1,6 +1,6 @@
 /*
 n/(i∗10)∗i 表示 (i) 位上 'k' 的出现个数 
-min(i, max(0, n %(i*10)-k*i+1)) 表示需要额外数的 (i*10)(i∗10) 位上 \text{'1'}’1’ 的个数。
+min(i, max(0, n %(i*10)-k*i+1)) 表示超出部分的 i 位上 'k' 的出现个数
 */
 class Solution{
 public:
