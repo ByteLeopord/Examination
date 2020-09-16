@@ -1,5 +1,6 @@
 class Solution {
 public:
+    vector<vector<int>> dir = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
     bool dfs(vector<vector<char>>& board, string word, int index, int x, int y, int xm, int ym){
         if(x < 0 || y < 0 || x > xm-1 || y > ym-1 || board[x][y] != word[index]){
             return false;
@@ -8,11 +9,15 @@ public:
             return true;
         }
         char temp = board[x][y];
-        board[x][y] = '-';
-        bool res = dfs(board, word, index+1, x+1, y, xm, ym) || dfs(board, word, index+1, x-1, y, xm, ym) || dfs(board, word, index+1, x, y+1, xm, ym) || dfs(board, word, index+1, x, y-1, xm, ym);
-        board[x][y] = temp;
-
-        return res;
+        for(int i = 0; i < 4; i++){
+            int a = x + dir[i][0];
+            int b = y + dir[i][1];
+            board[x][y] = '-';
+            if(dfs(board, word, index+1, a, b, xm, ym))
+                return true;
+            board[x][y] = temp;
+        }
+        return false;
     }
     bool exist(vector<vector<char>>& board, string word) {
         if(board.size() == 0) return false;
